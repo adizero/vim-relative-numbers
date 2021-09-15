@@ -15,9 +15,20 @@ let g:loaded_relative_numbers = 1
 
 let g:relative_numbers_enabled = 0
 
-function! s:set(value) abort
+function! s:is_relative_number_allowed() abort
     if !&number
         " skips buffers that never had numbers turned on
+        return v:false
+    endif
+	" if &filetype =~# 'qf'
+        " " skips for quickfix/location buffers
+        " return v:false
+	" endif
+	return v:true
+endfunction
+
+function! s:set(value) abort
+    if !s:is_relative_number_allowed()
         return
     endif
     if a:value
@@ -28,8 +39,7 @@ function! s:set(value) abort
 endfunction
 
 function! s:reset() abort
-    if !&number
-        " skips buffers that never had numbers turned on
+    if !s:is_relative_number_allowed()
         return
     endif
     let l:mode = mode()
