@@ -20,11 +20,11 @@ function! s:is_relative_number_allowed() abort
         " skips buffers that never had numbers turned on
         return v:false
     endif
-	" if &filetype =~# 'qf'
+    " if &filetype =~# 'qf'
         " " skips for quickfix/location buffers
         " return v:false
-	" endif
-	return v:true
+    " endif
+    return v:true
 endfunction
 
 function! s:set(value) abort
